@@ -4,7 +4,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
 import pandas as pd
 
-
+# Hecho por Joel Torres - Scrapping página principal para el proyecto
 def filter_description(raw_description):
     prov_description = ''
     prov_products = ''
