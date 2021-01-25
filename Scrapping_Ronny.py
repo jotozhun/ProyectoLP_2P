@@ -5,6 +5,7 @@ from selenium.webdriver.common.by import By
 import time
 import pandas as pd
 
+#Hecho por Ronny
 #Opciones de navegacion
 options = webdriver.ChromeOptions()
 options.add_argument("--start-maximized")
