@@ -3,6 +3,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
 import pandas as pd
+import random as rd
 
 # Hecho por Joel Torres - Scrapping página principal para el proyecto
 def filter_description(raw_description):
@@ -60,6 +61,9 @@ for catalog in catalog_list:
     descriptions = list()
     products = list()
     brands = list()
+    monthly_sells = list()
+    imports_to_LA = list()
+    ratings = list()
     for page in range(pages_num):
         if (page + 1) > 1:
             driver.get('https://compredesdemiami.com/catalog/' + catalog + '/' + page_code + str(page + 1))
@@ -84,11 +88,23 @@ for catalog in catalog_list:
             descriptions.append(prov_description)
             products.append(prov_products)
             brands.append(prov_brands)
+
+            monthly_sell = rd.randint(10000, 45000)
+            import_toLA = bool(rd.randint(0, 1))
+            rating = round(rd.uniform(2.70, 5.00), 2)
+            monthly_sells.append(monthly_sell)
+            imports_to_LA.append(import_toLA)
+            ratings.append(rating)
+
+
             # print('descripcion: %s\nproductos: %s\nmarcas: %s\n' %(prov_description, prov_products, prov_brands))
     df = pd.DataFrame({'Title': titles,
                        'Description': descriptions,
                        'Products': products,
                        'Products_brands': brands,
-                       'Contact_url': urls})
+                       'Contact_url': urls,
+                       'Monthly_sells': monthly_sells,
+                       'Imports_to_LA': imports_to_LA,
+                       'Rating': ratings})
     df.to_csv(catalog + '.csv', index=False)
 driver.quit()
